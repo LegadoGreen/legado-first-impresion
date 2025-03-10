@@ -132,7 +132,7 @@ const LegadoPresentation = () => {
           <p>Esta misión no puede esperar. Necesitamos soñadores decididos y hacedores valientes, personas que, al mirar atrás en 10 años, puedan decir con orgullo:</p>
           <div className="quote">Este es mi legado.</div>
           <p>La historia está en tus manos. La aventura ya comenzó.</p>
-          <button className="cta-button" onClick={() => console.log('CTA clicked')}>Únete a Legado</button>
+          <button className="cta-button" onClick={() => window.open('https://legado.green/', '_blank')}>Únete a Legado</button>
         </>
       ),
       backgroundImage: "url('background10.jpg')"
