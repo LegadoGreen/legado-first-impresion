@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Manejo de eventos táctiles para swipe
-interface TouchStartEvent extends React.TouchEvent<HTMLDivElement> {}
+type TouchStartEvent = React.TouchEvent<HTMLDivElement>;
 
 const LegadoPresentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -23,7 +23,7 @@ const LegadoPresentation = () => {
       content: (
         <>
           <p>Nuestro planeta alberga 53 regiones extraordinarias donde la naturaleza florece en toda su magnificencia. Sin embargo, hoy enfrentamos una crisis sin precedentes.</p>
-          <p className="highlight">"El planeta puede sobrevivir sin la humanidad, pero la humanidad no puede vivir sin un planeta saludable."</p>
+          <p className="highlight">&ldquo;El planeta puede sobrevivir sin la humanidad, pero la humanidad no puede vivir sin un planeta saludable.&rdquo;</p>
           <p>Cada minuto sin actuar nos aleja de un futuro sostenible, poniendo en peligro nuestra vida y la de generaciones por venir.</p>
         </>
       ),
@@ -35,7 +35,7 @@ const LegadoPresentation = () => {
       content: (
         <>
           <p>Emma observaba por la ventana de su apartamento urbano. Las luces de la ciudad ocultaban las estrellas que sabía estaban ahí, en algún lugar del firmamento.</p>
-          <p>Se preguntaba a menudo: <span className="highlight">"¿Y si pudiera hacer algo realmente significativo?"</span></p>
+          <p>Se preguntaba a menudo: <span className="highlight">&ldquo;¿Y si pudiera hacer algo realmente significativo?&rdquo;</span></p>
           <p>Una mañana cualquiera, un video que mostraba paisajes impresionantes capturó su atención y despertó algo dentro de ella...</p>
         </>
       ),
@@ -105,7 +105,7 @@ const LegadoPresentation = () => {
       title: "El Impacto Colectivo",
       content: (
         <>
-          <p>A medida que más personas se unían al movimiento, el impacto se multiplicaba. Emma formaba parte ahora de una comunidad global de "hacedores valientes".</p>
+          <p>A medida que más personas se unían al movimiento, el impacto se multiplicaba. Emma formaba parte ahora de una comunidad global de &ldquo;hacedores valientes&rdquo;.</p>
           <p>Gracias a la tecnología blockchain, Emma podía ver exactamente cómo sus acciones contribuían al objetivo mayor: el crecimiento de los árboles plantados, el aumento de la biodiversidad y el mejoramiento de la calidad de vida de las comunidades.</p>
         </>
       ),
