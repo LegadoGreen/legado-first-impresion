@@ -140,7 +140,7 @@ const LegadoPresentation = () => {
   ];
 
   useEffect(() => {
-    // Keyboard navigation
+    // Keyboard navigation for desktop
     const handleKeyDown = (e: { key: string; }) => {
       if (e.key === 'ArrowLeft') {
         prevSlide();
@@ -185,20 +185,20 @@ const LegadoPresentation = () => {
   };
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (isScrolling) return; // Prevent multiple triggers during rapid scroll
+    if (isScrolling) return; // Prevent rapid-fire slide changes
 
     if (e.deltaY > 0) {
-      // Scrolling down: next slide
       nextSlide();
     } else if (e.deltaY < 0) {
-      // Scrolling up: previous slide
       prevSlide();
     }
 
     setIsScrolling(true);
-    // Throttle wheel events for 500ms
     setTimeout(() => setIsScrolling(false), 500);
   };
+
+  // Use a media query to check if the user has a fine pointer (mouse)
+  const isFinePointer = typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches;
 
   // Calculate progress if still needed
   const progress = ((currentSlide + 1) / slides.length) * 100;
@@ -209,7 +209,8 @@ const LegadoPresentation = () => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      onWheel={handleWheel}
+      // Attach onWheel only if the pointer is fine (desktop)
+      {...(isFinePointer && { onWheel: handleWheel })}
     >
       {slides.map((slide, index) => (
         <div 
