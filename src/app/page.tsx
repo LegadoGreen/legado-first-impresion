@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 
-// Manejo de eventos táctiles para swipe
 type TouchStartEvent = React.TouchEvent<HTMLDivElement>;
 
 const LegadoPresentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const slides = [
     {
@@ -34,7 +34,7 @@ const LegadoPresentation = () => {
       title: "El Despertar",
       content: (
         <>
-          <p>Sofia observaba por la ventana de su apartamento urbano. Las luces de la ciudad ocultaban las estrellas que sabía estaban ahí, en algún lugar del firmamento.</p>
+          <p>Emma observaba por la ventana de su apartamento urbano. Las luces de la ciudad ocultaban las estrellas que sabía estaban ahí, en algún lugar del firmamento.</p>
           <p>Se preguntaba a menudo: <span className="highlight">&ldquo;¿Y si pudiera hacer algo realmente significativo?&rdquo;</span></p>
           <p>Una mañana cualquiera, un video que mostraba paisajes impresionantes capturó su atención y despertó algo dentro de ella...</p>
         </>
@@ -46,7 +46,7 @@ const LegadoPresentation = () => {
       title: "La Llamada",
       content: (
         <>
-          <p>Sofia descubrió <span className="highlight">Legado</span>, un movimiento con un propósito claro: transformar el futuro del planeta protegiendo sus tesoros naturales.</p>
+          <p>Emma descubrió <span className="highlight">Legado</span>, un movimiento con un propósito claro: transformar el futuro del planeta protegiendo sus tesoros naturales.</p>
           <div className="quote">¿Y si el futuro del planeta dependiera de ti?</div>
           <p>Lo que más le llamó la atención fue el enfoque transparente: cada acción sería medible y verificable gracias a la tecnología blockchain.</p>
         </>
@@ -83,8 +83,8 @@ const LegadoPresentation = () => {
       title: "La Decisión",
       content: (
         <>
-          <p>Sofia tomó una decisión que cambiaría su vida: se unió a Legado. Recibió su LegadoPass, una llave digital para experiencias transformadoras.</p>
-          <p>Su primera misión la llevó a un bosque tropical amenazado por la deforestación. Allí, junto con otros participantes y comunidades locales, Sofia plantó árboles nativos y aprendió técnicas ancestrales de cultivo sostenible.</p>
+          <p>Emma tomó una decisión que cambiaría su vida: se unió a Legado. Recibió su LegadoPass, una llave digital para experiencias transformadoras.</p>
+          <p>Su primera misión la llevó a un bosque tropical amenazado por la deforestación. Allí, junto con otros participantes y comunidades locales, Emma plantó árboles nativos y aprendió técnicas ancestrales de cultivo sostenible.</p>
         </>
       ),
       backgroundImage: "url('background6.jpg')"
@@ -94,7 +94,7 @@ const LegadoPresentation = () => {
       title: "La Transformación Personal",
       content: (
         <>
-          <p>Lo que Sofia no esperaba era la transformación personal. Cada día en el bosque la conectaba más con sus valores profundos, con un sentido de propósito que había estado buscando durante años.</p>
+          <p>Lo que Gemma no esperaba era la transformación personal. Cada día en el bosque la conectaba más con sus valores profundos, con un sentido de propósito que había estado buscando durante años.</p>
           <p>A través del <span className="highlight">LegadoPass</span>, descubrió cómo alinear su vida con valores profundos, alcanzando una felicidad auténtica y un propósito claro mientras ayudaba al planeta.</p>
         </>
       ),
@@ -105,8 +105,8 @@ const LegadoPresentation = () => {
       title: "El Impacto Colectivo",
       content: (
         <>
-          <p>A medida que más personas se unían al movimiento, el impacto se multiplicaba. Sofia formaba parte ahora de una comunidad global de &ldquo;hacedores valientes&rdquo;.</p>
-          <p>Gracias a la tecnología blockchain, Sofia podía ver exactamente cómo sus acciones contribuían al objetivo mayor: el crecimiento de los árboles plantados, el aumento de la biodiversidad y el mejoramiento de la calidad de vida de las comunidades.</p>
+          <p>A medida que más personas se unían al movimiento, el impacto se multiplicaba. Emma formaba parte ahora de una comunidad global de &ldquo;hacedores valientes&rdquo;.</p>
+          <p>Gracias a la tecnología blockchain, Emma podía ver exactamente cómo sus acciones contribuían al objetivo mayor: el crecimiento de los árboles plantados, el aumento de la biodiversidad y el mejoramiento de la calidad de vida de las comunidades.</p>
         </>
       ),
       backgroundImage: "url('background8.jpg')"
@@ -116,7 +116,7 @@ const LegadoPresentation = () => {
       title: "El Legado",
       content: (
         <>
-          <p>Diez años después, Sofia miraba las fotografías de todas las regiones en las que había participado. Cada imagen contaba una historia de transformación.</p>
+          <p>Diez años después, Emma miraba las fotografías de todas las regiones en las que había participado. Cada imagen contaba una historia de transformación.</p>
           <div className="quote">Yo fui parte del cambio. Este es mi legado.</div>
           <p>El cambio más profundo había ocurrido dentro de ella. Había encontrado un propósito, una comunidad y una forma de vida alineada con sus valores más profundos.</p>
         </>
@@ -140,7 +140,7 @@ const LegadoPresentation = () => {
   ];
 
   useEffect(() => {
-    // Event listener para navegación con teclado
+    // Keyboard navigation
     const handleKeyDown = (e: { key: string; }) => {
       if (e.key === 'ArrowLeft') {
         prevSlide();
@@ -150,23 +150,17 @@ const LegadoPresentation = () => {
     };
 
     document.addEventListener('keydown', handleKeyDown);
-
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [currentSlide]);
 
-  // Calcular progreso
-  const progress = ((currentSlide + 1) / slides.length) * 100;
-
-  // Navegar a la diapositiva anterior
   const prevSlide = () => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
     }
   };
 
-  // Navegar a la siguiente diapositiva
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide(currentSlide + 1);
@@ -183,15 +177,31 @@ const LegadoPresentation = () => {
 
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
-      // Swipe izquierdo
       nextSlide();
     }
-
     if (touchEnd - touchStart > 50) {
-      // Swipe derecho
       prevSlide();
     }
   };
+
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (isScrolling) return; // Prevent multiple triggers during rapid scroll
+
+    if (e.deltaY > 0) {
+      // Scrolling down: next slide
+      nextSlide();
+    } else if (e.deltaY < 0) {
+      // Scrolling up: previous slide
+      prevSlide();
+    }
+
+    setIsScrolling(true);
+    // Throttle wheel events for 500ms
+    setTimeout(() => setIsScrolling(false), 500);
+  };
+
+  // Calculate progress if still needed
+  const progress = ((currentSlide + 1) / slides.length) * 100;
 
   return (
     <div 
@@ -199,6 +209,7 @@ const LegadoPresentation = () => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onWheel={handleWheel}
     >
       {slides.map((slide, index) => (
         <div 
