@@ -94,7 +94,7 @@ const LegadoPresentation = () => {
       title: "La Transformación Personal",
       content: (
         <>
-          <p>Lo que GSofia no esperaba era la transformación personal. Cada día en el bosque la conectaba más con sus valores profundos, con un sentido de propósito que había estado buscando durante años.</p>
+          <p>Lo que Sofia no esperaba era la transformación personal. Cada día en el bosque la conectaba más con sus valores profundos, con un sentido de propósito que había estado buscando durante años.</p>
           <p>A través del <span className="highlight">LegadoPass</span>, descubrió cómo alinear su vida con valores profundos, alcanzando una felicidad auténtica y un propósito claro mientras ayudaba al planeta.</p>
         </>
       ),
